@@ -1,4 +1,4 @@
-// Elements
+// ELEMENTS
 const envelope = document.getElementById("envelope-container");
 const letter = document.getElementById("letter-container");
 const noBtn = document.querySelector(".no-btn");
@@ -8,60 +8,44 @@ const title = document.getElementById("letter-title");
 const catImg = document.getElementById("letter-cat");
 const buttons = document.getElementById("letter-buttons");
 const finalText = document.getElementById("final-text");
+const music = document.getElementById("love-music");
 
-// Click Envelope
 
+// OPEN ENVELOPE
 envelope.addEventListener("click", () => {
     envelope.style.display = "none";
     letter.style.display = "flex";
 
-    setTimeout( () => {
+    setTimeout(() => {
         document.querySelector(".letter-window").classList.add("open");
-    },50);
+    }, 50);
 });
 
-// Logic to move the NO btn
 
-noBtn.addEventListener("mouseover", () => {
-    const min = 200;
-    const max = 200;
+// NO BUTTON 😈
+function moveNoButton() {
+    const x = (Math.random() - 0.5) * 120;
+    const y = (Math.random() - 0.5) * 80;
 
-    const distance = Math.random() * (max - min) + min;
-    const angle = Math.random() * Math.PI * 2;
+    noBtn.style.transform = `translate(${x}px, ${y}px)`;
+}
 
-    const moveX = Math.cos(angle) * distance;
-    const moveY = Math.sin(angle) * distance;
-
-    noBtn.style.transition = "transform 0.3s ease";
-    noBtn.style.transform = `translate(${moveX}px, ${moveY}px)`;
+noBtn.addEventListener("mouseover", moveNoButton);
+noBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    moveNoButton();
+});
+noBtn.addEventListener("mousedown", moveNoButton);
+noBtn.addEventListener("touchstart", (e) => {
+    e.preventDefault();
+    moveNoButton();
 });
 
-// Logic to make YES btn to grow
 
-// let yesScale = 1;
-
-// yesBtn.style.position = "relative"
-// yesBtn.style.transformOrigin = "center center";
-// yesBtn.style.transition = "transform 0.3s ease";
-
-// noBtn.addEventListener("click", () => {
-//     yesScale += 2;
-
-//     if (yesBtn.style.position !== "fixed") {
-//         yesBtn.style.position = "fixed";
-//         yesBtn.style.top = "50%";
-//         yesBtn.style.left = "50%";
-//         yesBtn.style.transform = `translate(-50%, -50%) scale(${yesScale})`;
-//     }else{
-//         yesBtn.style.transform = `translate(-50%, -50%) scale(${yesScale})`;
-//     }
-// });
-
-// YES is clicked
-
+// YES BUTTON 💖
 yesBtn.addEventListener("click", () => {
-    title.textContent = "Yippeeee!";
 
+    title.textContent = "Yippeeee! 💖";
     catImg.src = "cat_dance.gif";
 
     document.querySelector(".letter-window").classList.add("final");
@@ -69,4 +53,13 @@ yesBtn.addEventListener("click", () => {
     buttons.style.display = "none";
 
     finalText.style.display = "block";
+
+    setTimeout(() => {
+        finalText.classList.add("show");
+    }, 50);
+
+    // 🎵 PLAY MUSIC
+    music.volume = 0.5;
+    music.currentTime = 0;
+    music.play();
 });
