@@ -45,7 +45,7 @@ noBtn.addEventListener("touchstart", (e) => {
 // YES BUTTON 💖
 yesBtn.addEventListener("click", () => {
 
-    title.textContent = "Yippeeee! 💖";
+    title.textContent = "Yippeeeeeee! 💖";
     catImg.src = "cat_dance.gif";
 
     document.querySelector(".letter-window").classList.add("final");
